@@ -14,14 +14,14 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 export function getAllCountries() {
   return async function (dispatch) {
-    const allCountries = await axios.get("http://localhost:3001/countries");
+    const allCountries = await axios.get("https://api-countries-i4ox.onrender.com/countries");
     return dispatch({ type: GET_ALL_COUNTRIES, payload: allCountries.data });
   };
 }
 
 export function getCountryDetail(id) {
   return async function (dispatch) {
-    const json = await axios.get(`http://localhost:3001/countries/${id}`);
+    const json = await axios.get(`https://api-countries-i4ox.onrender.com/countries/${id}`);
 
     return dispatch({
       type: GET_DETAIL,
@@ -34,7 +34,7 @@ export function getNameCountry(input) {
   return async function (dispatch) {
     try {
       let response = await axios.get(
-        "http://localhost:3001/countries?name=" + input
+        "https://api-countries-i4ox.onrender.com/countries?name=" + input
       );
       return dispatch({
         type: GET_COUNTRY_NAME,
@@ -50,7 +50,7 @@ export function getNameCountry(input) {
 export function getActivities() {
   return async function (dispatch) {
     
-    const info = await axios.get("http://localhost:3001/activities");
+    const info = await axios.get("https://api-countries-i4ox.onrender.com/activities");
 
     return dispatch({
       type: GET_ACTIVITIES,
@@ -63,7 +63,7 @@ export function createActivity(payload) {
   return async function (dispatch) {
     try {
       const json = await axios.post(
-        "http://localhost:3001/activities",
+        "https://api-countries-i4ox.onrender.com/activities",
         payload
       );
       return dispatch({ type: CREATE_ACTIVITY, payload: payload });
