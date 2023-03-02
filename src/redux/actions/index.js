@@ -42,6 +42,7 @@ export function getNameCountry(input) {
       });
     } catch (error) {
       console.log(error);
+
     }
   };
 }
