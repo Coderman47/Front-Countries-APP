@@ -66,7 +66,7 @@ export default function Home() {
       />
       <hr></hr>
       <div className="containerCountry">
-        <Cards currentCountries={currentCountries}/>
+        { allCountries? <Cards currentCountries={currentCountries}/> : "Loading..."}
       </div>
       
     </div>
