@@ -56,12 +56,5 @@ export default function CountryDetail(props) {
           </div>
           </div>
     )
-  }else{
-    return null
   }
-  
-
-  
-  
-
 };
