@@ -19,6 +19,7 @@ const initialState = {
   actualPage: 1,
 };
 
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_COUNTRIES:
@@ -28,6 +29,7 @@ const rootReducer = (state = initialState, action) => {
         allCountries: action.payload,
       };
     case GET_COUNTRY_NAME:
+
       return {
         ...state,
         countries: action.payload,
@@ -66,7 +68,6 @@ const rootReducer = (state = initialState, action) => {
                 const activities = country.activities.map(
                   (activity) => activity.name
                 );
-                // console.log(activities.includes(action.payload))
   
                 return activities.includes(action.payload);
               });

@@ -25,7 +25,16 @@ export default function Cards({ currentCountries }) {
               continent={country.continent}
               />)
           })
-        : "Loading..."}
+        : !Array.isArray(currentCountries) ? (
+          (
+            <Card
+            key={currentCountries.id}
+            id={currentCountries.id}
+            flags={currentCountries.flags}
+            name={currentCountries.name}
+            continent={currentCountries.continent}
+            />)
+        ) : "Loading..."}
   
     </div>
   )

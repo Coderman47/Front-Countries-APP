@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
 export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME";
@@ -14,14 +14,16 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 export function getAllCountries() {
   return async function (dispatch) {
-    const allCountries = await axios.get("https://api-countries-i4ox.onrender.com/countries");
+    // const allCountries = await axios.get("https://api-countries-i4ox.onrender.com/countries");
+    const allCountries = await axios.get("http://localhost:3001/countries");
     return dispatch({ type: GET_ALL_COUNTRIES, payload: allCountries.data });
   };
 }
 
 export function getCountryDetail(id) {
   return async function (dispatch) {
-    const json = await axios.get(`https://api-countries-i4ox.onrender.com/countries/${id}`);
+    // const json = await axios.get(`https://api-countries-i4ox.onrender.com/countries/${id}`);
+    const json = await axios.get(`http://localhost:3001/countries/${id}`);
 
     return dispatch({
       type: GET_DETAIL,
@@ -32,17 +34,23 @@ export function getCountryDetail(id) {
 
 export function getNameCountry(input) {
   return async function (dispatch) {
+    
     try {
+      // let response = await axios.get(
+      //   "https://api-countries-i4ox.onrender.com/countries?name=" + input
+      // );
       let response = await axios.get(
-        "https://api-countries-i4ox.onrender.com/countries?name=" + input
+        "http://localhost:3001/countries?name=" + input
       );
+
       return dispatch({
         type: GET_COUNTRY_NAME,
         payload: response.data,
+        
       });
     } catch (error) {
-      console.log(error);
-
+      console.log(error.message);
+      
     }
   };
 }
@@ -50,20 +58,29 @@ export function getNameCountry(input) {
 export function getActivities() {
   return async function (dispatch) {
     
-    const info = await axios.get("https://api-countries-i4ox.onrender.com/activities");
-
-    return dispatch({
-      type: GET_ACTIVITIES,
-      payload: info.data,
-    });
+    // const info = await axios.get("https://api-countries-i4ox.onrender.com/activities");
+    const info = await axios.get("http://localhost:3001/activities");
+    // console.log("QYE ONDA",info)
+    if(info.data.length > 0){
+      return dispatch({
+        type: GET_ACTIVITIES,
+        payload: info.data,
+      });
+    }
   };
 }
 
 export function createActivity(payload) {
   return async function (dispatch) {
     try {
+
+      // const json = await axios.post(
+      //   "https://api-countries-i4ox.onrender.com/activities",
+      //   payload
+      // );
+
       const json = await axios.post(
-        "https://api-countries-i4ox.onrender.com/activities",
+        "http://localhost:3001/activities",
         payload
       );
       return dispatch({ type: CREATE_ACTIVITY, payload: payload });

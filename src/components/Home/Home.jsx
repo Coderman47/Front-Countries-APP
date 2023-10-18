@@ -16,6 +16,7 @@ export default function Home() {
   const currentPage = useSelector((state) => state.actualPage);
   const allCountries = useSelector((state) => state.countries);
 
+  // console.log("ALL: ",allCountries)
 
   const [countriesPerPage, setCountriesPerPage] = useState(9.99);
 
@@ -24,7 +25,7 @@ export default function Home() {
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
 
-  const currentCountries =
+  const currentCountries = !Array.isArray(allCountries) ? allCountries :
     currentPage === 1 ? allCountries.slice(0, 9) : currentPage === 26 ? 
     allCountries.slice(249, allCountries.length) 
       : allCountries.slice(indexOfFirstCountry, indexOfLastCountry);
@@ -33,6 +34,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getAllCountries());
+    
   }, [dispatch]);
 
   function handler(data){
@@ -66,7 +68,7 @@ export default function Home() {
       />
       <hr></hr>
       <div className="containerCountry">
-        { allCountries? <Cards currentCountries={currentCountries}/> : "Loading..."}
+        { allCountries ? <Cards currentCountries={currentCountries}/> : "Loading..."}
       </div>
       
     </div>
